@@ -4,6 +4,7 @@ const ctx = canvas.getContext('2d');
 const shakebutton = document.querySelector('.shake');
 const MOVE_AMOUNT = 10;
 const slider = document.querySelector('.slider');
+const background = document.querySelector('.wes-a-sketch');
 
 // Setup our canvas for drawing
 // Make variables called height and width from the same properties on our canavas
@@ -83,12 +84,14 @@ function handleKey(e) {
 // Clear / Shake function
 function clearCanvas() {
   canvas.classList.add('shake');
+  background.classList.add('shake');
   ctx.clearRect(0, 0, width, height);
 
   canvas.addEventListener(
     'animationend',
     function() {
       canvas.classList.remove('shake');
+      background.classList.remove('shake');
     },
     { once: true }
   );
