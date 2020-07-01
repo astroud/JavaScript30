@@ -50,6 +50,19 @@ function draw({ key }) {
       break;
   }
 
+  // Ensure line remains on the canvas
+  if (x > width) {
+    x = width;
+  }
+  else if (x < 0) {
+    x = 0;
+  }
+  if (y > height) {
+    y = height;
+  }
+  else if (y < 0) {
+    y = 0;
+  }
   ctx.lineTo(x, y);
   ctx.stroke();
 }
