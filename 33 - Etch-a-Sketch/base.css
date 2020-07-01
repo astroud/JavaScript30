@@ -67,10 +67,12 @@ a {
 
 a.button, button, input[type="button"] {
   color: white;
-  background: var(--pink);
+  background: #CF9F35;
   padding: 1rem;
+  margin-right: 1rem;
   border: 0;
   border: 2px solid transparent;
+  border-radius: 5px;
   text-decoration: none;
   font-weight: 600;
   font-size:2rem;

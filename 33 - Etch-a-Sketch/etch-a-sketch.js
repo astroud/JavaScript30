@@ -5,6 +5,8 @@ const shakebutton = document.querySelector('.shake');
 const MOVE_AMOUNT = 10;
 const slider = document.querySelector('.slider');
 const background = document.querySelector('.wes-a-sketch');
+const rainbowButton = document.querySelector('.rainbow');
+let rainbowMode = false;
 
 // Setup our canvas for drawing
 // Make variables called height and width from the same properties on our canavas
@@ -19,7 +21,7 @@ ctx.lineCap = 'round';
 ctx.lineWidth = MOVE_AMOUNT;
 
 let hue = 0;
-ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+ctx.strokeStyle = `#3E3D40`;
 ctx.beginPath(); // Start the drawing
 ctx.moveTo(x, y);
 ctx.lineTo(x, y);
@@ -27,9 +29,14 @@ ctx.stroke();
 
 // Draw on the canvas
 function draw({ key }) {
-  // Increment the hue
-  hue += 10;
-  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  if (rainbowMode) {
+    // Increment the hue
+    hue += 10;
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  }
+  else {
+    ctx.strokeStyle = `#3E3D40`;
+  }
   console.log(hue, key);
   // Start the path
   ctx.beginPath();
@@ -73,6 +80,18 @@ function handleSlider() {
   ctx.lineWidth = slider.value;
 }
 
+function handleRainbowButton() {
+  if (rainbowMode === false) {
+    rainbowMode = true;
+    rainbowButton.classList.add('on');
+  }
+  else {
+    rainbowMode = false;
+    rainbowButton.classList.remove('on');
+  }
+  
+}
+
 // Write a handler for the keys
 function handleKey(e) {
   if (e.key.includes('Arrow')) {
@@ -104,3 +123,5 @@ shakebutton.addEventListener('click', clearCanvas);
 // Listen for changes to the line width slider
 slider.addEventListener('input', handleSlider);
 
+// List for click on rainbow button
+rainbowButton.addEventListener('click', handleRainbowButton);

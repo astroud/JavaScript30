@@ -9,10 +9,6 @@
 </head>
 
 <body>
-  <div class="slidecontainer">
-    <input type="range" min="1" max="100" value="10" class="slider">
-  </div>
-
   <div class="wes-a-sketch">
     <h1>Magic <strong>Wes-a-Sketch</strong> Screen</h1>
   </div>
@@ -20,7 +16,9 @@
   <div class="canvasWrap">
     <canvas width="1600" height="1000" id="etch-a-sketch"></canvas>
     <div class="buttons">
+      <input type="range" min="1" max="100" value="10" class="slider">
       <button class="shake">Shake!</button>
+      <button class="rainbow">🌈</button>
     </div>
 
   </div>
@@ -53,11 +51,20 @@
 
     div.wes-a-sketch {
       display: block;
-      margin-bottom: -650px;
+      margin-bottom: -700px;
       width: 900px;
       height: 650px;
       background-color: #BB0008;
       border-radius: 5px;
+    }
+
+    div.buttons {
+      width: 50%;
+      margin: 0 auto;
+    }
+
+    .on {
+      background: #cf9e35b5;
     }
 
     canvas {
@@ -103,11 +110,7 @@
     textarea,
     select {
       padding: 0;
-      margin: 0;
-    }
-
-    .slidecontainer {
-      width: 800px;
+      margin: 2rem;
     }
 
     /* The slider itself */
@@ -115,7 +118,8 @@
       /* Override default CSS styles */
       -webkit-appearance: none;
       appearance: none;
-      width: 100%;
+      width: 50%;
+      float: right;
       height: 7px;
       background: #d3d3d3;
       border-radius: 5px;
@@ -137,7 +141,7 @@
       width: 25px;
       height: 25px;
       border-radius: 50%;
-      background: #4CAF50;
+      background: #CF9F35;
       cursor: pointer;
     }
 
@@ -145,7 +149,7 @@
       width: 25px;
       height: 25px;
       border-radius: 50%;
-      background: #4CAF50;
+      background: #CF9F35;
       cursor: pointer;
     }
   </style>
