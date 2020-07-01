@@ -7,6 +7,8 @@ const slider = document.querySelector('.slider');
 const background = document.querySelector('.wes-a-sketch');
 const rainbowButton = document.querySelector('.rainbow');
 let rainbowMode = false;
+const CANVAS_BACKGROUND = '212, 217, 221';
+const DEFAULT_STROKE_COLOR = '#515054'
 
 // Setup our canvas for drawing
 // Make variables called height and width from the same properties on our canavas
@@ -21,7 +23,7 @@ ctx.lineCap = 'round';
 ctx.lineWidth = MOVE_AMOUNT;
 
 let hue = 0;
-ctx.strokeStyle = `#3E3D40`;
+ctx.strokeStyle = `${DEFAULT_STROKE_COLOR}`;
 ctx.beginPath(); // Start the drawing
 ctx.moveTo(x, y);
 ctx.lineTo(x, y);
@@ -35,7 +37,7 @@ function draw({ key }) {
     ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   }
   else {
-    ctx.strokeStyle = `#3E3D40`;
+    ctx.strokeStyle = DEFAULT_STROKE_COLOR;
   }
   // Start the path
   ctx.beginPath();
@@ -83,14 +85,14 @@ function vigorousStroke() {
 function handleSlider() {
   console.log(`slider.value ${slider.value}  and ctx.lineWidth ${ctx.lineWidth}`);
   if (slider.value < ctx.lineWidth) {
-    ctx.strokeStyle = `#DFD2D4`;
+    ctx.strokeStyle = DEFAULT_STROKE_COLOR;
     vigorousStroke();
     ctx.lineWidth = slider.value;
-    ctx.strokeStyle = `#3E3D40`;
+    ctx.strokeStyle = DEFAULT_STROKE_COLOR;
     ctx.stroke();
   }
   else {
-    ctx.strokeStyle = `#3E3D40`;
+    ctx.strokeStyle = DEFAULT_STROKE_COLOR;
     ctx.lineWidth = slider.value;
     ctx.stroke();
   }
@@ -108,7 +110,7 @@ function handleRainbowButton() {
   
 }
 
-// Write a handler for the keys
+// Handler for the keys
 function handleKey(e) {
   if (e.key.includes('Arrow')) {
     e.preventDefault();
@@ -120,7 +122,13 @@ function handleKey(e) {
 function clearCanvas() {
   canvas.classList.add('shake');
   background.classList.add('shake');
-  ctx.clearRect(0, 0, width, height);
+  
+  // Gradually shake away the drawing. Takes 3-4 shakes.
+  ctx.fillStyle = `rgba(${CANVAS_BACKGROUND}, 0.8)`
+  ctx.rect(0, 0, width, height);
+  ctx.fill();
+
+  ctx.beginPath();  // Removes ctx.rect above from the path
 
   canvas.addEventListener(
     'animationend',
