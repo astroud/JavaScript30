@@ -15,12 +15,16 @@
 
   <div class="canvasWrap">
     <canvas width="1600" height="1000" id="etch-a-sketch"></canvas>
-    <div class="buttons">
-      <input type="range" min="1" max="100" value="10" class="slider">
-      <button class="shake">Shake!</button>
-      <button class="rainbow">🌈</button>
-    </div>
 
+    <div class="bottom-controls">
+      <div class="knob left-knob"></div>
+      <div class="buttons">
+        <input type="range" min="1" max="100" value="10" class="slider">
+        <button class="shake">Shake!</button>
+        <button class="rainbow">🌈</button>
+      </div>
+      <div class="knob right-knob"></div>
+    </div>
   </div>
   <script src="./etch-a-sketch.js"></script>
 
@@ -74,7 +78,6 @@
       width: 800px;
       height: 500px;
       background: rgb(212, 217, 221);
-      /* #DFD2D4 */
       border-radius: 10px;
       border: 3px #ccc ridge;
 
@@ -154,6 +157,54 @@
       border-radius: 50%;
       background: #CF9F35;
       cursor: pointer;
+    }
+
+    .knob {
+      width: 90px;
+      height: 90px;
+      background-color: #fcfcfc;
+      border-radius: 90%;
+      border: 2px #AAA dotted;
+    }
+
+    .left-knob {
+      float: left;
+      margin-left: -50px;
+      margin-top: -5px;
+    }
+
+    .right-knob {
+      float: right;
+      margin-right: -50px;
+      margin-top: -50px;
+    }
+
+    .rotateLeft {
+      animation: rotateLeft 100ms 1 linear;
+    }
+
+    .rotateRight {
+      animation: rotateRight 100ms 1 linear;
+    }
+
+    @keyframes rotateLeft {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(-5deg);
+      }
+    }
+
+    @keyframes rotateRight {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(5deg);
+      }
     }
   </style>
 </body>

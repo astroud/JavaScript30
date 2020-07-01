@@ -46,20 +46,24 @@ function draw({ key }) {
   switch (key) {
     case 'ArrowUp':
       y -= MOVE_AMOUNT;
+      rotateKnob('left', 'up');
       break;
     case 'ArrowDown':
       y += MOVE_AMOUNT;
+      rotateKnob('left', 'down');
       break;
     case 'ArrowLeft':
       x -= MOVE_AMOUNT;
+      rotateKnob('right', 'left');
       break;
     case 'ArrowRight':
       x += MOVE_AMOUNT;
+      rotateKnob('right', 'right');
       break;
     default:
       break;
   }
-
+  
   // Ensure line remains on the canvas
   if (x > width) {
     x = width;
@@ -79,7 +83,7 @@ function draw({ key }) {
 
 // Used to shrink the line dot after enlarging it with the slider
 function vigorousStroke() {
-  ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();
+  ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();
 }
 
 function handleSlider() {
@@ -135,6 +139,43 @@ function clearCanvas() {
     function() {
       canvas.classList.remove('shake');
       background.classList.remove('shake');
+    },
+    { once: true }
+  );
+}
+
+// Rotate the knobs while drawing
+function rotateKnob(side, direction) {
+  switch(direction) {
+    case 'right':
+      direction = 'rotateRight';
+      break;
+    case 'left':
+      direction = 'rotateLeft';
+      break;
+    case 'up':
+      direction = 'rotateRight';
+      break;
+    case 'down':
+      direction = 'rotateLeft';
+      break;
+    default:
+      break;
+  }
+    
+  if (side === 'left') {
+    side = document.querySelector('.left-knob');
+  }
+  else {
+    side = document.querySelector('.right-knob');
+  }
+
+  side.classList.add(direction);
+
+  side.addEventListener(
+    'animationend',
+    function() {
+      side.classList.remove(direction);
     },
     { once: true }
   );
