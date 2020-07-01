@@ -3,6 +3,7 @@ const canvas = document.querySelector('#etch-a-sketch');
 const ctx = canvas.getContext('2d');
 const shakebutton = document.querySelector('.shake');
 const MOVE_AMOUNT = 10;
+const slider = document.querySelector('.slider');
 
 // Setup our canvas for drawing
 // Make variables called height and width from the same properties on our canavas
@@ -67,6 +68,10 @@ function draw({ key }) {
   ctx.stroke();
 }
 
+function handleSlider() {
+  ctx.lineWidth = slider.value;
+}
+
 // Write a handler for the keys
 function handleKey(e) {
   if (e.key.includes('Arrow')) {
@@ -92,3 +97,7 @@ function clearCanvas() {
 // Listen for arrow keys
 window.addEventListener('keydown', handleKey);
 shakebutton.addEventListener('click', clearCanvas);
+
+// Listen for changes to the line width slider
+slider.addEventListener('input', handleSlider);
+
