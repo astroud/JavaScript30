@@ -37,7 +37,6 @@ function draw({ key }) {
   else {
     ctx.strokeStyle = `#3E3D40`;
   }
-  console.log(hue, key);
   // Start the path
   ctx.beginPath();
   ctx.moveTo(x, y);
@@ -76,8 +75,25 @@ function draw({ key }) {
   ctx.stroke();
 }
 
+// Used to shrink the line dot after enlarging it with the slider
+function vigorousStroke() {
+  ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();ctx.stroke();
+}
+
 function handleSlider() {
-  ctx.lineWidth = slider.value;
+  console.log(`slider.value ${slider.value}  and ctx.lineWidth ${ctx.lineWidth}`);
+  if (slider.value < ctx.lineWidth) {
+    ctx.strokeStyle = `#DFD2D4`;
+    vigorousStroke();
+    ctx.lineWidth = slider.value;
+    ctx.strokeStyle = `#3E3D40`;
+    ctx.stroke();
+  }
+  else {
+    ctx.strokeStyle = `#3E3D40`;
+    ctx.lineWidth = slider.value;
+    ctx.stroke();
+  }
 }
 
 function handleRainbowButton() {
