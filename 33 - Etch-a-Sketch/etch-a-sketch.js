@@ -87,16 +87,16 @@ function vigorousStroke() {
 }
 
 function handleSlider() {
-  console.log(`slider.value ${slider.value}  and ctx.lineWidth ${ctx.lineWidth}`);
+  let tmpStrokeColor = ctx.strokeStyle;
+
   if (slider.value < ctx.lineWidth) {
     ctx.strokeStyle = `rgb(${CANVAS_BACKGROUND})`;
     vigorousStroke();
     ctx.lineWidth = slider.value;
-    ctx.strokeStyle = DEFAULT_STROKE_COLOR;
+    ctx.strokeStyle = tmpStrokeColor;
     ctx.stroke();
   }
   else {
-    ctx.strokeStyle = DEFAULT_STROKE_COLOR;
     ctx.lineWidth = slider.value;
     ctx.stroke();
   }
