@@ -20,7 +20,7 @@
       <div class="knob left-knob"></div>
       <div class="buttons">
         <input type="range" min="1" max="100" value="10" class="slider">
-        <button class="shake">Shake!</button>
+        <button id="shake">Shake!</button>
         <button class="rainbow">🌈</button>
       </div>
       <div class="knob right-knob"></div>
@@ -84,7 +84,10 @@
     }
 
     canvas.shake,
-    div.wes-a-sketch.shake {
+    div.wes-a-sketch.shake,
+    div.knob.shake,
+    input.shake,
+    button.shake {
       animation: shake 0.5s linear 1;
     }
 

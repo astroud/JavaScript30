@@ -1,14 +1,15 @@
 // Select the elements on the page - canvas, shake button
 const canvas = document.querySelector('#etch-a-sketch');
 const ctx = canvas.getContext('2d');
-const shakebutton = document.querySelector('.shake');
+const shakebutton = document.querySelector('#shake');
 const MOVE_AMOUNT = 10;
 const slider = document.querySelector('.slider');
 const background = document.querySelector('.wes-a-sketch');
 const rainbowButton = document.querySelector('.rainbow');
 let rainbowMode = false;
 const CANVAS_BACKGROUND = '212, 217, 221';
-const DEFAULT_STROKE_COLOR = '#515054'
+const DEFAULT_STROKE_COLOR = '#515054';
+const knobs = document.querySelectorAll('.knob');
 
 // Setup our canvas for drawing
 // Make variables called height and width from the same properties on our canavas
@@ -126,6 +127,10 @@ function handleKey(e) {
 function clearCanvas() {
   canvas.classList.add('shake');
   background.classList.add('shake');
+  shakebutton.classList.add('shake');
+  rainbowButton.classList.add('shake');
+  slider.classList.add('shake');
+  knobs.forEach(knob => knob.classList.add('shake'));
   
   // Gradually shake away the drawing. Takes 3-4 shakes.
   ctx.fillStyle = `rgba(${CANVAS_BACKGROUND}, 0.8)`
@@ -139,6 +144,10 @@ function clearCanvas() {
     function() {
       canvas.classList.remove('shake');
       background.classList.remove('shake');
+      shakebutton.classList.remove('shake');
+      rainbowButton.classList.remove('shake');
+      slider.classList.remove('shake');
+      knobs.forEach(knob => knob.classList.remove('shake'));
     },
     { once: true }
   );
