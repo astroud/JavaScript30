@@ -1,12 +1,13 @@
-﻿![](https://javascript30.com/images/JS3-social-share.png)
+﻿# My JavaScript30 Solutions
 
-# JavaScript30
+* [Wes-a-Sketch](https://astroud.github.io/JavaScript30/33%20-%20Etch-a-Sketch/ "An interactive Etch-a-Sketch from Wes Bos' Beginner JavaScript course") - An interactive Etch-a-Sketch from Wes Bos' Beginner JavaScript course
 
+![](https://javascript30.com/images/JS3-social-share.png)
+
+## Community #JavaScript30 Content
 Starter Files + Completed solutions for the JavaScript 30 Day Challenge.
 
 Grab the course at [https://JavaScript30.com](https://JavaScript30.com)
-
-## Community #JavaScript30 Content
 
 Feel free to submit a PR adding a link to your own recaps, guides or reviews!
 
