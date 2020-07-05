@@ -34,14 +34,8 @@ ctx.stroke();
 
 // Draw on the canvas
 function draw({ key }) {
-  if (rainbowMode) {
-    // Increment the hue
-    hue += 10;
-    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-  }
-  else {
-    ctx.strokeStyle = DEFAULT_STROKE_COLOR;
-  }
+  setStrokeColor();
+
   // Start the path
   ctx.beginPath();
   ctx.moveTo(x, y);
@@ -82,6 +76,29 @@ function draw({ key }) {
   }
   ctx.lineTo(x, y);
   ctx.stroke();
+}
+
+// Draw on the canvas with the mouse cursor
+function drawByCursor({x, y}) {
+  setStrokeColor();
+
+  // Start the path
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x, y);
+  ctx.closePath();
+  ctx.stroke();
+}
+
+function setStrokeColor() {
+  if (rainbowMode) {
+    // Increment the hue
+    hue += 10;
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  }
+  else {
+    ctx.strokeStyle = DEFAULT_STROKE_COLOR;
+  }
 }
 
 // Used to shrink the line dot after enlarging it with the slider
@@ -192,16 +209,6 @@ function rotateKnob(side, direction) {
   );
 }
 
-// Listen for arrow keys
-window.addEventListener('keydown', handleKey);
-shakebutton.addEventListener('click', clearCanvas);
-
-// Listen for changes to the line width slider
-slider.addEventListener('input', handleSlider);
-
-// List for click on rainbow button
-rainbowButton.addEventListener('click', handleRainbowButton);
-
 function drawWes() {
   const image = new Image(800, 800);  // Stretching a 400x file out
   image.src = 'wes-a-sketch.png';     // to 800x800
@@ -212,3 +219,33 @@ function drawWes() {
   // Draw when image has loaded
   image.onload = () => ctx.drawImage(image, dx, dy, image.width, image.height);
 }
+
+function getMousePos(canvas, e) {
+  var rect = canvas.getBoundingClientRect(), // abs. size of element
+      scaleX = canvas.width / rect.width,    // relationship bitmap vs. element for X
+      scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for Y
+
+  return {
+    x: (e.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
+    y: (e.clientY - rect.top) * scaleY     // been adjusted to be relative to element
+  }
+}
+
+function handleMouseMovement(e) {
+  var mousePos = getMousePos(canvas, e);
+  drawByCursor(mousePos);
+}
+
+
+// Listen for arrow keys
+window.addEventListener('keydown', handleKey);
+shakebutton.addEventListener('click', clearCanvas);
+
+// Listen for changes to the line width slider
+slider.addEventListener('input', handleSlider);
+
+// Listen for click on rainbow button
+rainbowButton.addEventListener('click', handleRainbowButton);
+
+// Listen for mouse movement on canvas
+canvas.addEventListener('mousemove', handleMouseMovement);
