@@ -5,210 +5,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wes-a-Sketch</title>
-  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="main.css">
   <link rel="icon" type="image/png" href="/favicon.png">
 </head>
 
 <body>
   <div class="wes-a-sketch">
     <h1>Magic <strong>Wes-a-Sketch</strong> Screen</h1>
-  </div>
-
-  <div class="canvasWrap">
     <canvas width="1600" height="1000" id="etch-a-sketch"></canvas>
 
     <div class="bottom-controls">
       <div class="knob left-knob"></div>
+      <div class="knob right-knob"></div>
       <div class="buttons">
         <input type="range" min="1" max="100" value="10" class="slider">
         <button id="shake">Shake!</button>
         <button class="rainbow">🌈</button>
       </div>
-      <div class="knob right-knob"></div>
     </div>
   </div>
+
+  <p class="credits">Modified by <a href="https://aaronstroud.com" "My homepage">Aaron Stroud</a>. Original design from
+    Wes Bos' <a href="https://beginnerjavascript.com" title="JavaScript Fundamentals with Wes Bos">Beginner JavaScript
+      course</a>.</p>
   <script src="./etch-a-sketch.js"></script>
-
-  <style>
-    body {
-      min-height: 100vh;
-      display: grid;
-      align-items: center;
-      justify-items: center;
-      background: #008ecf;
-    }
-
-    h1 {
-      color: #CF9F35;
-      text-align: center;
-      font-size: 2em;
-      text-shadow: 2px 2px #333;
-      padding-top: 0.2em;
-    }
-
-    h1 strong {
-      font-size: 1.3em;
-      padding-left: 1em;
-      padding-right: 1em;
-    }
-
-    div.wes-a-sketch {
-      display: block;
-      margin-bottom: -700px;
-      width: 900px;
-      height: 650px;
-      background-color: #CF000F;
-      /* #BB0008; */
-      border-radius: 45px;
-      border: 1px #000 inset;
-    }
-
-    div.buttons {
-      width: 50%;
-      margin: 0 auto;
-    }
-
-    .on {
-      background: #cf9e35b5;
-    }
-
-    canvas {
-      /* Set the width and height to half the actual size so it doesn't look pixelated */
-      width: 800px;
-      height: 500px;
-      background: rgb(212, 217, 221);
-      border-radius: 10px;
-      border: 3px #ccc ridge;
-
-    }
-
-    canvas.shake,
-    div.wes-a-sketch.shake,
-    div.knob.shake,
-    input.shake,
-    button.shake {
-      animation: shake 0.5s linear 1;
-    }
-
-    @keyframes shake {
-
-      10%,
-      90% {
-        transform: translate3d(-1px, 0, 0);
-      }
-
-      20%,
-      80% {
-        transform: translate3d(2px, 0, 0);
-      }
-
-      30%,
-      50%,
-      70% {
-        transform: translate3d(-4px, 0, 0);
-      }
-
-      40%,
-      60% {
-        transform: translate3d(4px, 0, 0);
-      }
-    }
-
-    input:not([type="checkbox"]):not([type="radio"]),
-    textarea,
-    select {
-      padding: 0;
-      margin: 2rem;
-    }
-
-    /* The slider itself */
-    .slider {
-      /* Override default CSS styles */
-      -webkit-appearance: none;
-      appearance: none;
-      width: 50%;
-      float: right;
-      height: 7px;
-      background: #d3d3d3;
-      border-radius: 5px;
-      outline: none;
-      opacity: 0.7;
-      -webkit-transition: .2s;
-      transition: opacity .2s;
-    }
-
-    /* Mouse-over effects */
-    .slider:hover {
-      opacity: 1;
-    }
-
-    /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
-    .slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      background: #CF9F35;
-      cursor: pointer;
-    }
-
-    .slider::-moz-range-thumb {
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      background: #CF9F35;
-      cursor: pointer;
-    }
-
-    .knob {
-      width: 90px;
-      height: 90px;
-      background-color: #fcfcfc;
-      border-radius: 90%;
-      border: 2px #AAA dotted;
-    }
-
-    .left-knob {
-      float: left;
-      margin-left: -50px;
-      margin-top: -5px;
-    }
-
-    .right-knob {
-      float: right;
-      margin-right: -50px;
-      margin-top: -50px;
-    }
-
-    .rotateLeft {
-      animation: rotateLeft 100ms 1 linear;
-    }
-
-    .rotateRight {
-      animation: rotateRight 100ms 1 linear;
-    }
-
-    @keyframes rotateLeft {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(-5deg);
-      }
-    }
-
-    @keyframes rotateRight {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(5deg);
-      }
-    }
-  </style>
 </body>
 
 </html>
