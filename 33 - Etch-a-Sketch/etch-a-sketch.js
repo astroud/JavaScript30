@@ -15,6 +15,8 @@ const knobs = document.querySelectorAll('.knob');
 // Make variables called height and width from the same properties on our canavas
 const { width, height } = canvas;
 
+drawWes();  // Draw Wes Bos
+
 // Create random x and y starting points on the canvas
 let x = Math.floor(Math.random() * width);
 let y = Math.floor(Math.random() * height);
@@ -199,3 +201,14 @@ slider.addEventListener('input', handleSlider);
 
 // List for click on rainbow button
 rainbowButton.addEventListener('click', handleRainbowButton);
+
+function drawWes() {
+  const image = new Image(800, 800);  // Stretching a 400x file out
+  image.src = 'wes-a-sketch.png';     // to 800x800
+
+  const dx = width / 2 - image.width / 2;
+  const dy = height / 2 - image.height / 2;
+
+  // Draw when image has loaded
+  image.onload = () => ctx.drawImage(image, dx, dy, image.width, image.height);
+}
