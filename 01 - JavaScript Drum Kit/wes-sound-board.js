@@ -16,9 +16,14 @@ function playSound(soundKey) {
   const key = document.querySelector(`div[data-key="${soundKey}"]`);
   if (!audio) return;
 
-  key.classList.add('playing');
+  key.classList.add('playing');   // Highlight the currently sound
   audio.currentTime = 0;
   audio.play();
+
+  // Remove highlight after the effect finishes playing
+  audio.addEventListener('ended', function() {
+    key.classList.remove('playing');
+  });
 }
 
 function handleKey(e) {
@@ -31,9 +36,7 @@ function handleClick(e) {
   playSound(soundKey);
 }
 
-// Apply a visual effect to the current sound
 const keys = Array.from(document.querySelectorAll('.key'));
-keys.forEach(key => key.addEventListener('transitionend', removeTransition));
 
 // Handle keys and clicks
 window.addEventListener('keydown', handleKey);
