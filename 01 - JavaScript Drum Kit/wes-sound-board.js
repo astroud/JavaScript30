@@ -20,10 +20,33 @@ function playSound(soundKey) {
   audio.currentTime = 0;
   audio.play();
 
+  countdown(key, audio.duration);
+
   // Remove highlight after the effect finishes playing
   audio.addEventListener('ended', function() {
     key.classList.remove('playing');
   });
+}
+
+// Display a countdown while the audio clip plays
+function countdown(key, duration) {
+  let kbdTag = key.querySelector('kbd');
+  let originalShortcut = kbdTag.innerHTML;
+  
+  kbdTag.innerHTML = duration.toFixed(1);
+  timer = duration.toFixed(1);
+  
+  function updateTimeLeft() {
+      timer -= 0.1;
+      kbdTag.innerHTML = timer.toFixed(1);
+
+      if (timer < 0) {
+        clearInterval(intervalId);
+        kbdTag.innerHTML = originalShortcut;
+      }
+  }
+
+  let intervalId = window.setInterval(updateTimeLeft, 100);
 }
 
 function handleKey(e) {

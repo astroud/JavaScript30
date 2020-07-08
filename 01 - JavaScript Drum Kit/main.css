@@ -10,6 +10,13 @@ body,html {
   font-family: sans-serif;
 }
 
+h1 {
+  font-size: 7vw;
+  background: #000;
+  color: #fff;
+  padding: 1vw;
+}
+
 .keys {
   /* display: flex; */
   /* flex: 1; */
