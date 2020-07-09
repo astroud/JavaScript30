@@ -14,7 +14,8 @@ h1 {
   font-size: 7vw;
   background: #000;
   color: #fff;
-  padding: 1vw;
+  padding: 1vh;
+  margin: 1vh 0 1vh;
 }
 
 .keys {
@@ -36,7 +37,7 @@ h1 {
   width: 10rem;
   text-align: center;
   color: white;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.8);
   text-shadow: 0 0 .5rem black;
 }
 
@@ -44,6 +45,7 @@ h1 {
   transform: scale(1.1);
   border-color: #ffc600;
   box-shadow: 0 0 1rem #ffc600;
+  background: rgba(0,0,0,0.7);
 }
 
 kbd {
@@ -56,4 +58,86 @@ kbd {
   text-transform: uppercase;
   letter-spacing: .1rem;
   color: #ffc600;
+}
+
+img.turtle {
+  display: none;
+  margin: 0 auto;
+  width: 5rem;
+}
+
+img.turtle.shake {
+  animation: 0.5s shake 1.6s linear 2;
+}
+
+@keyframes shake {
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) { 
+.key {
+    width: 33vw;
+    margin: 5vw 5vw 5vw 8vw;
+  }
+
+  kbd {
+    font-size: 5vh;
+  }
+
+  .sound {
+    font-size: 2vh;
+  }
+
+  img.turtle {
+    width: 23vw;
+  }
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) { 
+  .key {
+    width: 18vw;
+    margin: 2vw 2vw 2vw 3vw;
+  }
+
+  kbd {
+    font-size: 8vh;
+  }
+
+  .sound {
+    font-size: 4vh;
+  }
+
+  img.turtle {
+    width: 10vw;
+  }
 }

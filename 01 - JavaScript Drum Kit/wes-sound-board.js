@@ -1,26 +1,18 @@
-// List of audio events for addEventListener:
-// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Media_events
-
-// Animation ideas for project
-// https://javascript.info/js-animation
-
-console.log('This is a tribute to Wes Bos for his entertaining and accessible videos.');
-
-function removeTransition(e) {
-  if (e.propertyName !== 'transform') return;
-  e.target.classList.remove('playing');
-}
+console.log('This soundboard is a tribute to Wes Bos for his entertaining and accessible videos.');
 
 function playSound(soundKey) {
   const audio = document.querySelector(`audio[data-key="${soundKey}"]`);
   const key = document.querySelector(`div[data-key="${soundKey}"]`);
   if (!audio) return;
 
-  key.classList.add('playing');   // Highlight the currently sound
+  // Match animation to the duration
+  key.setAttribute('style', `transition-duration: ${audio.duration}s`);
+
+  key.classList.add('playing');   // Highlight the currently playing sound
   audio.currentTime = 0;
   audio.play();
-
-  countdown(key, audio.duration);
+  
+  countdown(key, audio.duration); // Display a countdown
 
   // Remove highlight after the effect finishes playing
   audio.addEventListener('ended', function() {
@@ -28,25 +20,43 @@ function playSound(soundKey) {
   });
 }
 
-// Display a countdown while the audio clip plays
+// Displays a countdown while the audio clip plays
 function countdown(key, duration) {
   let kbdTag = key.querySelector('kbd');
-  let originalShortcut = kbdTag.innerHTML;
-  
-  kbdTag.innerHTML = duration.toFixed(1);
+
+  if (key.dataset.key != "76") {            // Insert duration for non-turtle
+    kbdTag.innerHTML = duration.toFixed(1); // sound clips
+  }
+
   timer = duration.toFixed(1);
-  
+
   function updateTimeLeft() {
       timer -= 0.1;
-      kbdTag.innerHTML = timer.toFixed(1);
+      if (key.dataset.key === "76") {
+        // When the turtle clip is played, display the turtle
+        kbdTag.style.display = 'none';
+        turtle();
+      } else {
+        kbdTag.innerHTML = timer.toFixed(1);
+      }
 
       if (timer < 0) {
-        clearInterval(intervalId);
-        kbdTag.innerHTML = originalShortcut;
+        clearInterval(intervalId);      // Stop updateTimeLeft() from running
+        if (key.dataset.key === "76") {  
+          document.querySelector('.turtle').style.display = 'none';
+          kbdTag.style.display = 'block';
+        }
+        kbdTag.innerHTML = key.dataset.letter;
       }
   }
 
   let intervalId = window.setInterval(updateTimeLeft, 100);
+}
+
+function turtle() {
+  let turtle = document.querySelector('.turtle');
+  turtle.style.display = 'inline-block';
+  turtle.classList.add('shake');
 }
 
 function handleKey(e) {
