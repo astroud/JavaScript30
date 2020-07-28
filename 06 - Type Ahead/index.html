@@ -30,14 +30,11 @@
     const cities = [];
     let matchesMarkers = [];
 
-    console.log('about to ask');
     navigator.geolocation.getCurrentPosition((loc) => {
-      console.log('asked');
       userLatitude = loc.coords.latitude;
       userLongitude = loc.coords.longitude;
-      console.log('sorting by dist');
       sortByDistance();
-    })
+    }, (err) => alert('Sorting cities by proximity requires location permissions'))
 
     fetch(endpoint)
       .then(blob => blob.json())
@@ -63,7 +60,7 @@
     function sortByDistance() {
       cities.forEach(city => {
         city.distanceFromUser = calculateDistance(userLatitude, userLongitude,
-          city.latitude, city.longitude, 'K');
+          city.latitude, city.longitude, 'M');
       });
 
       cities.sort(function (a, b) {
@@ -126,7 +123,7 @@
       iconSize: [50, 41],
       iconAnchor: [25, 20],
       popupAnchor: [-3, -76],
-      shadowUrl: 'marker-shadow.png',
+      // shadowUrl: 'marker-shadow.png',
       shadowSize: [50, 41],
       shadowAnchor: [25, 20]
     });
@@ -139,7 +136,9 @@
 
       // Place markers for the 100 closest matches
       matchArray.slice(0, 100).forEach(match => {
-        matchesMarkers.push(L.marker([match.latitude, match.longitude]).addTo(mymap));
+        matchesMarkers.push(L.marker([match.latitude, match.longitude])
+          .bindPopup(`<strong>${match.city}</strong>`)
+          .addTo(mymap));
       });
     }
 
