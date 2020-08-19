@@ -33,6 +33,7 @@
     navigator.geolocation.getCurrentPosition((loc) => {
       userLatitude = loc.coords.latitude;
       userLongitude = loc.coords.longitude;
+      placeUserMarker();
       sortByDistance();
     }, (err) => alert('Sorting cities by proximity requires location permissions'))
 
@@ -124,13 +125,22 @@
       iconUrl: 'marker-bos-icon.png',
       iconSize: [50, 41],
       iconAnchor: [25, 20],
-      popupAnchor: [-3, -76],
-      // shadowUrl: 'marker-shadow.png',
       shadowSize: [50, 41],
       shadowAnchor: [25, 20]
     });
-    const bossMarker = L.marker([45.3849302, -77.6854559], { icon: bosIcon }).addTo(mymap);
+    const bossMarker = L.marker([45.3849302, -77.6854559], { icon: bosIcon }).bindPopup(`<strong>Boss Headquarters</strong>`).addTo(mymap);
 
+    // User's location
+    const userIcon = L.icon({
+      iconUrl: 'marker-user-location.png',
+      iconSize: [25, 41]
+    });
+
+    function placeUserMarker() {
+      const userMarker = L.marker([userLatitude, userLongitude], { icon: userIcon })
+        .bindPopup(`<strong>Your location</strong>`)
+        .addTo(mymap);
+    }
     function displayMarkers(matchArray) {
       // First clear existing markers
       matchesMarkers.forEach(marker => marker.remove());
