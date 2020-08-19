@@ -99,9 +99,11 @@
 
     const searchInput = document.querySelector('.search');
     const suggestions = document.querySelector('.suggestions');
+    const form = document.querySelector('.search-form');
 
     searchInput.addEventListener('change', displayMatches);
     searchInput.addEventListener('keyup', displayMatches);
+    form.addEventListener('submit', e => e.preventDefault());
 
 
     /* Map stuff */
