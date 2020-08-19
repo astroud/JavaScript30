@@ -136,14 +136,26 @@
       matchesMarkers.forEach(marker => marker.remove());
       matchesMarkers = [];
 
+      // If there are no matches
+      if (!matchArray[0]) { return undefined; }
+
       // Place markers for the 100 closest matches
       matchArray.slice(0, 100).forEach(match => {
         matchesMarkers.push(L.marker([match.latitude, match.longitude])
           .bindPopup(`<strong>${match.city}</strong>`)
           .addTo(mymap));
       });
-    }
 
+      // Zoom map to include 100 closest matches
+      let closestCity = matchArray[0];
+      let distantCity = matchArray[matchArray.length - 1];
+
+      mymap.flyToBounds([
+        [closestCity.latitude + 1.5, closestCity.longitude + 1.5],
+        [distantCity.latitude - 1.5, distantCity.longitude - 1.5]
+      ], null,
+        { duration: 1.5 });
+    }
   </script>
 </body>
 
