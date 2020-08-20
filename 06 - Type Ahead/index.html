@@ -153,7 +153,7 @@
       // Place markers for the 100 closest matches
       matchArray.slice(0, 100).forEach(match => {
         matchesMarkers.push(L.marker([match.latitude, match.longitude])
-          .bindPopup(`<strong>${match.city}</strong>`)
+          .bindPopup(`<strong>${match.city}</strong><br>Pop ${numberWithCommas(match.population)}`)
           .addTo(mymap));
       });
 
