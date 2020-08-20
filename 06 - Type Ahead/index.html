@@ -11,6 +11,7 @@
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
+  <script src="bouncemarker.js"></script>
 </head>
 
 <body>
@@ -83,12 +84,12 @@
 
     function displayMatches() {
       const matchArray = findMatches(this.value, cities);
-      const html = matchArray.map(place => {
+      const html = matchArray.map((place, index) => {
         const regex = new RegExp(this.value, 'gi');
         let cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
         let stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
         return `
-          <li>
+          <li data-index="${index + 1}">
             <span class="name">${cityName}, ${stateName}</span>
             <span class="population">${numberWithCommas(place.population)}</span>
           </li>
@@ -99,6 +100,22 @@
       displayMarkers(matchArray);
     }
 
+    function handleSuggestionsClick(e) {
+      let clickedSuggestion = e.target.closest('li');
+      let markerToHighlight = matchesMarkers[e.target.closest('li').dataset.index];
+      let listItems = document.querySelectorAll('ul.suggestions li');
+
+      listItems.forEach(item => item.classList.remove('highlight'));
+
+      if (clickedSuggestion.classList.contains('highlight')) {
+        clickedSuggestion.classList.toggle('highlight');
+      }
+      else {
+        clickedSuggestion.classList.add('highlight');
+        markerToHighlight.bounce({ duration: 500, height: 30, loop: 2 });
+      }
+    }
+
     const searchInput = document.querySelector('.search');
     const suggestions = document.querySelector('.suggestions');
     const form = document.querySelector('.search-form');
@@ -106,7 +123,7 @@
     searchInput.addEventListener('change', displayMatches);
     searchInput.addEventListener('keyup', displayMatches);
     form.addEventListener('submit', e => e.preventDefault());
-
+    suggestions.addEventListener('click', e => handleSuggestionsClick(e));
 
     /* Map stuff */
     var mymap = L.map('mapid').setView([39.833333, -98.583333], 4);
@@ -131,10 +148,9 @@
     });
     const bossMarker = L.marker([45.3849302, -77.6854559], { icon: bosIcon }).bindPopup(`<strong>Boss Headquarters</strong>`).addTo(mymap);
 
-    // User's location
+    // Icon for user's location
     const userIcon = L.icon({
       iconUrl: 'marker-user-location.png',
-      iconSize: [25, 41]
     });
 
     function placeUserMarker() {

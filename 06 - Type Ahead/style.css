@@ -65,6 +65,11 @@ input.search {
   background: linear-gradient(to top,  #ffffff 0%,#EFEFEF 100%);
 }
 
+.suggestions li.highlight {
+background: #C9CCD2; 
+font-weight: 400;
+}
+
 span.population {
   font-size: 15px;
 }
